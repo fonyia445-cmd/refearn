@@ -8,6 +8,7 @@ export async function GET() {
         const plans = await Plan.find({ isActive: true }).sort({ price: 1 });
         return NextResponse.json({ plans });
     } catch (error) {
-        return NextResponse.json({ error: "Failed to fetch plans" }, { status: 500 });
+        console.error("GET /api/plans Error:", error);
+        return NextResponse.json({ error: "Failed to fetch plans", details: String(error) }, { status: 500 });
     }
 }
